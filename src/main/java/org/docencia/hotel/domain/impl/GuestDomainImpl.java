@@ -1,9 +1,17 @@
 package org.docencia.hotel.domain.impl;
 
+import java.util.Set;
+
 import org.docencia.hotel.domain.api.GuestDomain;
+import org.docencia.hotel.domain.model.Guest;
+import org.docencia.hotel.domain.model.GuestPreferences;
 import org.docencia.hotel.service.api.GuestService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author danielrguezh
+ * @version 1.0.0
+ */
 @Service
 public class GuestDomainImpl implements GuestDomain {
 
@@ -13,5 +21,38 @@ public class GuestDomainImpl implements GuestDomain {
         this.service = service;
     }
 
-    // TODO
+    @Override
+    public Set<Guest> findAll() {
+        return service.findAll();
+    }
+
+    @Override
+    public Guest findById(long id) {
+        return service.findById(id);
+    }
+
+    @Override
+    public Guest save(Guest guest) {
+        return service.save(guest);
+    }
+
+    @Override
+    public Boolean deleteById(long id) {
+        return service.deleteById(id);
+    }
+
+    @Override
+    public GuestPreferences findPreferences(Long guestId) {
+        return service.findPreferences(guestId);
+    }
+
+    @Override
+    public GuestPreferences savePreference(Long guestId, GuestPreferences preferences) {
+        return service.savePreference(guestId, preferences);
+    }
+
+    @Override
+    public Boolean deletePreferences(Long guestId) {
+        return service.deletePreferences(guestId);
+    }
 }

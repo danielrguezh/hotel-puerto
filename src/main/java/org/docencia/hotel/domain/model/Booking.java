@@ -1,5 +1,9 @@
 package org.docencia.hotel.domain.model;
 
+/**
+ * @author danielrguezh
+ * @version 1.0.0
+ */
 public class Booking {
     private Long id;
 

@@ -10,8 +10,6 @@ import java.util.Objects;
  * @author danielrguezh
  * @version 1.0.0
  */
-@XmlRootElement(name = "guest")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Guest {
     private String id;
     private String fullName;
