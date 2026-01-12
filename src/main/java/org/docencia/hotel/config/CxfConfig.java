@@ -7,13 +7,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.docencia.hotel.web.soap.GuestSoapServiceImpl;
+import java.util.Objects;
 
 @Configuration
 public class CxfConfig {
+    private final GuestSoapServiceImpl guestSoapEndPoint;
+    private final Bus bus;
+
+
+    public CxfConfig(GuestSoapServiceImpl guestSoapEndPoint, Bus bus) {
+        this.guestSoapEndPoint = guestSoapEndPoint;
+        this.bus=bus;
+    }
+    
 
     @Bean
-    public Endpoint guestEndpoint(Bus bus, GuestSoapServiceImpl impl) {
-        EndpointImpl endpoint = new EndpointImpl(bus, impl);
+    public Endpoint guestEndpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, guestSoapEndPoint);
         endpoint.publish("/guest");
         return endpoint;
     }

@@ -3,6 +3,8 @@ package org.docencia.hotel.web.rest;
 import org.docencia.hotel.domain.api.GuestDomain;
 import org.docencia.hotel.domain.model.Guest;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +22,30 @@ public class GuestController {
     }
 
     @Operation(summary = "Obtener huésped por id")
-    @GetMapping("/<built-in function id>")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Huesped no encontrado")
+    })
+    @GetMapping("/{id}")
     public ResponseEntity<Guest> findById(@PathVariable Long id) {
-        throw new UnsupportedOperationException("TODO");
+        Guest guest = guestDomain.findById(id);
+        if (guest == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(guest);
     }
 
     @Operation(summary = "Guardar huésped")
-    @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Huesped creado correctamente"),
+            @ApiResponse(responseCode = "400", description = "No se pudo guardar el huesped")
+    })
+    @PostMapping("/add")
     public ResponseEntity<Guest> save(@Valid @RequestBody Guest guest) {
-        throw new UnsupportedOperationException("TODO");
+        Guest guestSaved = guestDomain.save(guest);
+        if (guestSaved == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(guestSaved);
     }
 }
