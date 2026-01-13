@@ -1,6 +1,6 @@
 package org.docencia.hotel.mapper.nosql;
 
-import org.mapstruct.Mapper;
+import   org.mapstruct.Mapper;
 import org.docencia.hotel.domain.model.GuestPreferences;
 import org.docencia.hotel.persistence.nosql.document.GuestPreferencesDocument;
 

@@ -5,15 +5,15 @@ package org.docencia.hotel.domain.model;
  * @version 1.0.0
  */
 public class Booking {
-    private Long id;
+    private String  id;
 
     private Room room;
 
     private Guest guest;
 
-    private LocalDate checkIn;
+    private  String checkIn;
 
-    private LocalDate checkOut;
+    private String checkOut;
 
     /**
      * Constructor vacio
@@ -25,7 +25,7 @@ public class Booking {
      * Constructor con identificador
      * @param id id unica de la reserva
      */
-    public Booking(Long id) {
+    public Booking(String id) {
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class Booking {
      * @param checkIn fecha y hora de entrada de la reserva
      * @param checkOut fecha y hora de salida de la reserva
      */
-    public Booking(Long id, Room room, Guest guest, LocalDate checkIn, LocalDate checkOut) {
+    public Booking(String id, Room room, Guest guest, String checkIn, String checkOut) {
         this.id = id;
         this.room = room;
         this.guest = guest;
@@ -45,11 +45,11 @@ public class Booking {
         this.checkOut = checkOut;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,19 +69,19 @@ public class Booking {
         this.guest = guest;
     }
 
-    public LocalDate getCheckIn() {
+    public String getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(LocalDate checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
 
-    public LocalDate getCheckOut() {
+    public String getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(LocalDate checkOut) {
+    public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
 

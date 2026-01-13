@@ -56,6 +56,7 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public boolean deleteById(String id) {
-        return guestJpaRepository.existsById(id);
+        guestJpaRepository.deleteById(id);
+        return !guestJpaRepository.existsById(id);
     }
 }

@@ -54,6 +54,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public boolean deleteById(String id) {
-        return hotelRepository.existsById(id);
+        hotelRepository.deleteById(id);
+        return !hotelRepository.existsById(id);
     }
 }

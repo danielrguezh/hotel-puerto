@@ -18,28 +18,28 @@ public interface GuestDomain {
 
     /**
      * Metodo que devuelve un huesped por su identificador
-     * @param id id del huesped
+     * @param id unica del huesped
      * @return huesped con ese identificador, null si no existe
      */
     Guest findById(long id);
 
     /**
      * Metodo que guarda un huesped
-     * @param guest huesped que se quiere guardar
+     * @param guest huesped a guardar
      * @return huesped guardado
      */
     Guest save(Guest guest);
 
     /**
      * Metodo que elimina un huesped por su id
-     * @param id id del huesped que se quiere eliminar
+     * @param id unica del huesped que se quiere eliminar
      * @return true si se ha eliminado y false si no se ha eliminado
      */
     Boolean deleteById(long id);
 
     /**
      * Metodo que devuelve las preferencias de un huesped por su id
-     * @param guestId id del huesped
+     * @param guestId id unica del huesped
      * @return preferencias del huesped
      */
     GuestPreferences findPreferences(Long guestId);

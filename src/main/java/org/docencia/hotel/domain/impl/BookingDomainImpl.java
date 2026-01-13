@@ -1,11 +1,13 @@
 package org.docencia.hotel.domain.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.docencia.hotel.domain.api.BookingDomain;
 import org.docencia.hotel.domain.model.Booking;
 import org.docencia.hotel.service.api.BookingService;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 @Service
 public class BookingDomainImpl implements BookingDomain {
@@ -17,12 +19,12 @@ public class BookingDomainImpl implements BookingDomain {
     }
 
     @Override
-    public Set<Booking> findAll() {
+    public List<Booking> findAll() {
         return service.findAll();
     }
 
     @Override
-    public Booking findById(long id) {
+    public Booking findById(String id) {
         return service.findById(id);
     }
 
@@ -32,7 +34,7 @@ public class BookingDomainImpl implements BookingDomain {
     }
 
     @Override
-    public Boolean deleteById(long id) {
-        return service.deleteById(id);
+    public Boolean deleteById(String id) {
+        return service.;
     }
 }

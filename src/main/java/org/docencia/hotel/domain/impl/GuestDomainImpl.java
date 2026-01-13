@@ -27,7 +27,7 @@ public class GuestDomainImpl implements GuestDomain {
     }
 
     @Override
-    public Guest findById(long id) {
+    public Guest findById(St id) {
         return service.findById(id);
     }
 
