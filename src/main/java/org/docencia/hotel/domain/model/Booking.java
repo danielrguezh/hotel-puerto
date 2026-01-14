@@ -6,13 +6,9 @@ package org.docencia.hotel.domain.model;
  */
 public class Booking {
     private String  id;
-
     private Room room;
-
     private Guest guest;
-
     private  String checkIn;
-
     private String checkOut;
 
     /**

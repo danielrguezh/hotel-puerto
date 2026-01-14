@@ -8,7 +8,7 @@ import java.util.Set;
  * @version 1.0.0
  */
 public class Room {
-    private Long id;
+    private String id;
     private String number;
     private String type;
     private float pricePerNight;
@@ -25,7 +25,7 @@ public class Room {
      * Constructor con el identificador
      * @param id unica de la habitacion
      */
-    public Room(Long id) {
+    public Room(String id) {
         this.id = id;
     }
 
@@ -38,7 +38,7 @@ public class Room {
      * @param hotel donde se encuentra la habitacion
      * @param bookings reservas que tiene la habitacion
      */
-    public Room(Long id, String number, String type, float pricePerNight, Hotel hotel, Set<Booking> bookings) {
+    public Room(String id, String number, String type, float pricePerNight, Hotel hotel, Set<Booking> bookings) {
         this.id = id;
         this.number = number;
         this.type = type;
@@ -47,11 +47,11 @@ public class Room {
         this.bookings = bookings;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

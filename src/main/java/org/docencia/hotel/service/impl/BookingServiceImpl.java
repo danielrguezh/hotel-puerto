@@ -3,7 +3,6 @@ package org.docencia.hotel.service.impl;
 import org.docencia.hotel.domain.model.Booking;
 import org.docencia.hotel.mapper.jpa.BookingMapper;
 import org.docencia.hotel.persistence.jpa.entity.BookingEntity;
-import org.docencia.hotel.persistence.jpa.entity.GuestEntity;
 import org.docencia.hotel.persistence.repository.jpa.BookingRepository;
 import org.docencia.hotel.service.api.BookingService;
 import org.springframework.stereotype.Service;
@@ -39,13 +38,13 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking save(Booking booking) {
         if (booking.getId() == null) {
-            List<BookingEntity> guests = repository.findAll();
-            if (guests.isEmpty()) {
+            List<BookingEntity> bookings = repository .findAll();
+            if (bookings.isEmpty()) {
                 booking.setId("B1");
             } else {
-                BookingEntity last = guests.get(guests.size() - 1);
+                BookingEntity last = bookings.get(bookings.size() - 1);
                 int newId = Integer.parseInt(last.getId().replace("B", "")) + 1;
-                guest.setId("B" + newId);
+                booking.setId("B" + newId);
             }
         }
         return mapper.toDomain(repository.save(mapper.toEntity(booking)));

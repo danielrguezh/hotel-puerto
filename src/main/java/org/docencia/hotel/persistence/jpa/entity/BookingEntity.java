@@ -1,22 +1,134 @@
 package org.docencia.hotel.persistence.jpa.entity;
 
-import jakarta.persistence.*;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 /**
- * @author danielrguez
+ * @author danielrguezh
  * @version 1.0.0
  */
 @Entity
 @Table(name = "booking")
 public class BookingEntity {
-    // TODO: @Id + campos + relaciones
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-    //    room_id TEXT NOT NULL,
-    //    guest_id TEXT NOT NULL,
-    //    check_in TEXT,
-    //    check_out TEXT,
-    //    FOREIGN KEY (room_id) REFERENCES room(id),
-    //    FOREIGN KEY (guest_id) REFERENCES guest(id)
+
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private RoomEntity roomId;
+
+    @ManyToOne
+    @JoinColumn(name = "guest_id")
+    private GuestEntity guestId;
+
+    @Column(name = "check_in")
+    private String checkIn;
+
+    @Column(name = "check_out")
+    private String checkOut;
+
+    /**
+     * Constructor vacio
+     */
+    public BookingEntity() {
+    }
+
+    /**
+     * Constructor con identificador
+     *
+     * @param id unica de la reserva
+     */
+    public BookingEntity(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Constructor con todos los parametros de la clase
+     *
+     * @param id unica de la reserva
+     * @param roomId identificador de la habitacion de la reserva
+     * @param guestId identificador de huesped de la reserva
+     * @param checkIn fecha y hora de entrada de la reserva
+     * @param checkOut fecha y hora de salida de la reserva
+     */
+    public BookingEntity(String checkIn, String checkOut, GuestEntity guestId, String id, RoomEntity roomId) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.guestId = guestId;
+        this.id = id;
+        this.roomId = roomId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public RoomEntity getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(RoomEntity roomId) {
+        this.roomId = roomId;
+    }
+
+    public GuestEntity getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(GuestEntity guestId) {
+        this.guestId = guestId;
+    }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BookingEntity other = (BookingEntity) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
 }

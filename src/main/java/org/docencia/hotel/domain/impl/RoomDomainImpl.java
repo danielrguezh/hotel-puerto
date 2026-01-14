@@ -1,6 +1,6 @@
 package org.docencia.hotel.domain.impl;
 
-import java.util.Set;
+import java.util.List;
 
 import org.docencia.hotel.domain.api.RoomDomain;
 import org.docencia.hotel.domain.model.Room;
@@ -21,12 +21,12 @@ public class RoomDomainImpl implements RoomDomain {
     }
 
     @Override
-    public Set<Room> findAll() {
+    public List<Room> findAll() {
         return service.findAll();
     }
 
     @Override
-    public Room findById(long id) {
+    public Room findById(String id) {
         return service.findById(id);
     }
 
@@ -36,12 +36,12 @@ public class RoomDomainImpl implements RoomDomain {
     }
 
     @Override
-    public Boolean deleteById(long id) {
+    public Boolean deleteById(String id) {
         return service.deleteById(id);
     }
 
     @Override
-    public Room findByHotelId(Long hotelId) {
+    public List<Room> findByHotelId(String hotelId) {
         return service.findByHotelId(hotelId);
     }
 }
