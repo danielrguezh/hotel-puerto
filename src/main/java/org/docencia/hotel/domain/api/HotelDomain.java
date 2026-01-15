@@ -1,5 +1,6 @@
 package org.docencia.hotel.domain.api;
 
+import java.util.List;
 import java.util.Set;
 
 import org.docencia.hotel.domain.model.Hotel;
@@ -13,14 +14,14 @@ public interface HotelDomain {
      * Metodo que devulve una lista de todos los hoteles
      * @return Lista de hoteles
      */
-    Set<Hotel> findAll();
+    List<Hotel> findAll();
 
     /**
      * Metodo que devuelve un hotel por su identificador
      * @param id id del hotel
      * @return hotel con ese identificador, null si no existe
      */
-    Hotel findById(long id);
+    Hotel findById(String id);
 
     /**
      * Metodo que guarda un hotel
@@ -34,5 +35,6 @@ public interface HotelDomain {
      * @param id id del hotel que se quiere eliminar
      * @return true si se ha eliminado y false si no se ha eliminado
      */
-    Boolean deleteById(long id);
+    Boolean deleteById(String id);
+
 }

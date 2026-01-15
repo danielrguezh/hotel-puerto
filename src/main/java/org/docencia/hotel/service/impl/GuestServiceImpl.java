@@ -1,11 +1,16 @@
 package org.docencia.hotel.service.impl;
 
 import org.docencia.hotel.domain.model.Guest;
+import org.docencia.hotel.domain.model.GuestPreferences;
 import org.docencia.hotel.mapper.jpa.GuestMapper;
+import org.docencia.hotel.mapper.nosql.GuestPreferencesMapper;
 import org.docencia.hotel.persistence.jpa.entity.GuestEntity;
 import org.docencia.hotel.persistence.repository.jpa.GuestJpaRepository;
+import org.docencia.hotel.persistence.repository.nosql.GuestPreferencesRepository;
 import org.docencia.hotel.service.api.GuestService;
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +24,16 @@ public class GuestServiceImpl implements GuestService {
     private final GuestJpaRepository guestJpaRepository;
     private final GuestMapper guestMapper;
 
-    public GuestServiceImpl(GuestJpaRepository guestJpaRepository, GuestMapper guestMapper) {
+    private final GuestPreferencesMapper preferencesMapper;
+    private final GuestPreferencesRepository preferencesRepository;
+
+    public GuestServiceImpl(GuestJpaRepository guestJpaRepository, GuestMapper guestMapper,
+            GuestPreferencesMapper preferencesMapper, GuestPreferencesRepository preferencesRepository) {
         this.guestJpaRepository = guestJpaRepository;
         this.guestMapper = guestMapper;
+        this.preferencesMapper = preferencesMapper;
+        this.preferencesRepository = preferencesRepository;
+
     }
 
     @Override
@@ -58,5 +70,30 @@ public class GuestServiceImpl implements GuestService {
     public boolean deleteById(String id) {
         guestJpaRepository.deleteById(id);
         return !guestJpaRepository.existsById(id);
+    }
+
+        @Override
+    public GuestPreferences findPreferences(String guestId) {
+        return preferencesMapper.toDomain(preferencesRepository.findById(guestId).orElse(null));
+    }
+
+    @Override
+    @Transactional
+    public GuestPreferences savePreference(String guestId, GuestPreferences preferences) {
+        if (guestId == null || guestId.isBlank()) {
+            return null;
+        }
+        preferences.setGuestId(guestId);
+        return preferencesMapper.toDomain(preferencesRepository.save(preferencesMapper.toDocument(preferences)));
+    }
+
+    @Override
+    @Transactional
+    public Boolean deletePreferences(String guestId) {
+        if (preferencesRepository.findById(guestId) == null) {
+            return false;
+        }
+        preferencesRepository.deleteById(guestId);
+        return true;
     }
 }

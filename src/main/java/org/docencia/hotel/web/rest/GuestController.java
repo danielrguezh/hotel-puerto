@@ -1,7 +1,13 @@
 package org.docencia.hotel.web.rest;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.docencia.hotel.domain.api.GuestDomain;
 import org.docencia.hotel.domain.model.Guest;
+import org.docencia.hotel.domain.model.GuestPreferences;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -10,6 +16,10 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author danielrguezh
+ * @version 1.0.0
+ */
 @Tag(name = "Guests", description = "Operaciones REST de huéspedes")
 @RestController
 @RequestMapping("/api/guests")
@@ -27,7 +37,7 @@ public class GuestController {
             @ApiResponse(responseCode = "404", description = "Huesped no encontrado")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Guest> findById(@PathVariable Long id) {
+    public ResponseEntity<Guest> findById(@PathVariable String id) {
         Guest guest = guestDomain.findById(id);
         if (guest == null) {
             return ResponseEntity.notFound().build();
@@ -47,5 +57,76 @@ public class GuestController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(guestSaved);
+    }
+
+    @Operation(summary = "Obtener todos los huespedes")
+    @GetMapping("/")
+    public List<Guest> findAll() {
+        return guestDomain.findAll();
+    }
+
+    @Operation(summary = "Borrar huesped")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "huesped borrado correctamente"),
+            @ApiResponse(responseCode = "404", description = "huesped no encontrado")
+    })
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deleteById(@PathVariable(value = "id") String id) {
+        boolean respuesta = guestDomain.deleteById(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("borrado", respuesta);
+        return response;
+
+    }
+
+    @Operation(summary = "Guardar preferencias del huésped")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "preferencias creadas correctamente"),
+            @ApiResponse(responseCode = "400", description = "No se pudo guardar las preferencias"),
+            @ApiResponse(responseCode = "404", description = "No existe el huesped para guardar las preferencias")
+
+    })
+    @PostMapping("/add/preferences/{guestId}")
+    public ResponseEntity<GuestPreferences> savePreferences(@PathVariable String guestId,
+            @Valid @RequestBody GuestPreferences preferences) {
+        boolean existe = false;
+        if (guestDomain.findById(guestId) != null) {
+            existe = true;
+        }
+        if (!existe) {
+            return ResponseEntity.notFound().build();
+        }
+        GuestPreferences preferencesSaved = guestDomain.savePreference(guestId, preferences);
+        if (preferencesSaved == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(preferencesSaved);
+    }
+
+    @Operation(summary = "Borrar preferencias del huésped")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "preferencias borradas correctamente"),
+            @ApiResponse(responseCode = "404", description = "preferencias no encontradas")
+    })
+    @DeleteMapping("/preferences/{guestId}")
+    public Map<String, Boolean> deletePreferenceById(@PathVariable String guestId) {
+        boolean respuesta = guestDomain.deletePreferences(guestId);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("borrado", respuesta);
+        return response;
+    }
+
+    @Operation(summary = "Obtener preferencias del huésped por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "preferencias no encontradas")
+    })
+    @GetMapping("/preferences/{guestId}")
+    public ResponseEntity<GuestPreferences> findPreferenceById(@PathVariable String guestId) {
+        GuestPreferences preferences = guestDomain.findPreferences(guestId);
+        if (preferences == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(preferences);
     }
 }

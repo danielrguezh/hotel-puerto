@@ -3,6 +3,8 @@ package org.docencia.hotel.persistence.jpa.entity;
 import jakarta.persistence.*;
 import java.util.Objects;
 
+import org.docencia.hotel.persistence.nosql.document.GuestPreferencesDocument;
+
 /**
  * @author danielrguez
  * @version 1.0.0
@@ -18,6 +20,8 @@ public class GuestEntity {
     private String email;
     @Column(name = "phone")
     private  String phone;
+    @Transient
+    private GuestPreferencesDocument preference;
 
     /**
      * Constructor vacio
@@ -40,11 +44,12 @@ public class GuestEntity {
      * @param email del huesped
      * @param phone telefono del huesped
      */
-    public GuestEntity(String id, String fullName, String email, String phone) {
+    public GuestEntity(String id, String fullName, String email, String phone, GuestPreferencesDocument preference) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.preference = preference;
     }
 
     public String getId() {
@@ -77,6 +82,14 @@ public class GuestEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public GuestPreferencesDocument getPreference() {
+        return preference;
+    }
+
+    public void setPreference(GuestPreferencesDocument preference) {
+        this.preference = preference;
     }
 
     @Override

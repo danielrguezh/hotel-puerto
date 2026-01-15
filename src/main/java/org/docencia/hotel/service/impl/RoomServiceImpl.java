@@ -1,9 +1,8 @@
 package org.docencia.hotel.service.impl;
 
-import org.docencia.hotel.domain.model.Booking;
+
 import org.docencia.hotel.domain.model.Room;
 import org.docencia.hotel.mapper.jpa.RoomMapper;
-import org.docencia.hotel.persistence.jpa.entity.BookingEntity;
 import org.docencia.hotel.persistence.jpa.entity.RoomEntity;
 import org.docencia.hotel.persistence.repository.jpa.RoomRepository;
 import org.docencia.hotel.service.api.RoomService;
@@ -56,5 +55,10 @@ public class RoomServiceImpl implements RoomService {
     public boolean deleteById(String id) {
         repository.deleteById(id);
         return !repository.existsById(id);
+    }
+
+    @Override
+    public List<Room> findByHotelId(String hotelId) {
+        return mapper.toRooms(repository.findAllByHotelId(hotelId));
     }
 }

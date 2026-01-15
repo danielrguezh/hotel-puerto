@@ -1,5 +1,6 @@
 package org.docencia.hotel.domain.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.docencia.hotel.domain.api.GuestDomain;
@@ -22,12 +23,12 @@ public class GuestDomainImpl implements GuestDomain {
     }
 
     @Override
-    public Set<Guest> findAll() {
-        return service.findAll();
+    public List<Guest> findAll() {
+        return service.getAll();
     }
 
     @Override
-    public Guest findById(St id) {
+    public Guest findById(String id) {
         return service.findById(id);
     }
 
@@ -37,22 +38,22 @@ public class GuestDomainImpl implements GuestDomain {
     }
 
     @Override
-    public Boolean deleteById(long id) {
+    public Boolean deleteById(String id) {
         return service.deleteById(id);
     }
 
     @Override
-    public GuestPreferences findPreferences(Long guestId) {
+    public GuestPreferences findPreferences(String guestId) {
         return service.findPreferences(guestId);
     }
 
     @Override
-    public GuestPreferences savePreference(Long guestId, GuestPreferences preferences) {
+    public GuestPreferences savePreference(String guestId, GuestPreferences preferences) {
         return service.savePreference(guestId, preferences);
     }
 
     @Override
-    public Boolean deletePreferences(Long guestId) {
+    public Boolean deletePreferences(String guestId) {
         return service.deletePreferences(guestId);
     }
 }

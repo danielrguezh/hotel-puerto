@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-13T11:17:07+0000",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
+    date = "2026-01-15T19:52:41+0000",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.45.0.v20260101-2150, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class GuestPreferencesMapperImpl implements GuestPreferencesMapper {
@@ -23,13 +23,10 @@ public class GuestPreferencesMapperImpl implements GuestPreferencesMapper {
 
         GuestPreferencesDocument guestPreferencesDocument = new GuestPreferencesDocument();
 
-        guestPreferencesDocument.setPreferredLanguage( domain.getPreferredLanguage() );
-        guestPreferencesDocument.setNewsLetterOptIn( domain.getNewsLetterOptIn() );
         List<String> list = domain.getTags();
         if ( list != null ) {
             guestPreferencesDocument.setTags( new ArrayList<String>( list ) );
         }
-        guestPreferencesDocument.setFavoriteRoomType( domain.getFavoriteRoomType() );
         guestPreferencesDocument.setNotes( domain.getNotes() );
 
         return guestPreferencesDocument;
@@ -43,13 +40,10 @@ public class GuestPreferencesMapperImpl implements GuestPreferencesMapper {
 
         GuestPreferences guestPreferences = new GuestPreferences();
 
-        guestPreferences.setPreferredLanguage( doc.getPreferredLanguage() );
-        guestPreferences.setNewsLetterOptIn( doc.isNewsLetterOptIn() );
         List<String> list = doc.getTags();
         if ( list != null ) {
             guestPreferences.setTags( new ArrayList<String>( list ) );
         }
-        guestPreferences.setFavoriteRoomType( doc.getFavoriteRoomType() );
         guestPreferences.setNotes( doc.getNotes() );
 
         return guestPreferences;

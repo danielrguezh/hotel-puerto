@@ -15,6 +15,7 @@ public class Guest {
     private String fullName;
     private String email;
     private  String phone;
+    private GuestPreferences preference;
 
     /**
      * Constructor vacio
@@ -36,12 +37,14 @@ public class Guest {
      * @param fullName nombre del huesped
      * @param email del huesped
      * @param phone telefono del huesped
+     * @param preference preferencias del huesped
      */
-    public Guest(String id, String fullName, String email, String phone) {
+    public Guest(String id, String fullName, String email, String phone,  GuestPreferences preference) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.preference = preference;
     }
 
     public String getId() {
@@ -74,6 +77,14 @@ public class Guest {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public GuestPreferences getPreference() {
+        return this.preference;
+    }
+
+    public void setPreference(GuestPreferences preference) {
+        this.preference = preference;
     }
 
     @Override

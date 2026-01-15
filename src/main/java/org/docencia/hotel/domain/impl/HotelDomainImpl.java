@@ -1,5 +1,6 @@
 package org.docencia.hotel.domain.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.docencia.hotel.domain.api.HotelDomain;
@@ -21,12 +22,12 @@ public class HotelDomainImpl implements HotelDomain {
     }
 
     @Override
-    public Set<Hotel> findAll() {
-        return service.findAll();
+    public List<Hotel> findAll() {
+        return service.getAll();
     }
 
     @Override
-    public Hotel findById(long id) {
+    public Hotel findById(String id) {
         return service.findById(id);
     }
 
@@ -36,7 +37,7 @@ public class HotelDomainImpl implements HotelDomain {
     }
 
     @Override
-    public Boolean deleteById(long id) {
+    public Boolean deleteById(String id) {
         return service.deleteById(id);
     }
 

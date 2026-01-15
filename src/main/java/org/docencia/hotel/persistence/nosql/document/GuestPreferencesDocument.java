@@ -15,19 +15,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class GuestPreferencesDocument {
 
     @Id
-    private Long id;
-
-    @Field("preferredLanguage")
-    private String preferredLanguage;
-
-    @Field("newsLetterOptIn")
-    private boolean newsLetterOptIn;
+    private String id;
 
     @Field("tags")
     private List<String> tags;
-
-    @Field("favoriteRoomType")
-    private String favoriteRoomType;
 
     @Field("notes")
     private String notes;
@@ -42,51 +33,28 @@ public class GuestPreferencesDocument {
      * Constructor con el identificador de la clase
      * @param id id del huesped
      */
-    public GuestPreferencesDocument(Long id) {
+    public GuestPreferencesDocument(String id) {
         this.id = id;
     }
 
     /**
      * Constructor con todos los parametros de la clase
      * @param id id del huesped
-     * @param preferredLanguage idioma preferido del huesped
-     * @param newsLetterOptIn preferencia en recivir periodicos
      * @param tags etiquetas del huesped
-     * @param favoriteRoomType tipo de habitacion favorita
      * @param notes notas del guest
      */
-    public GuestPreferencesDocument(Long id, String preferredLanguage, boolean newsLetterOptIn, List<String> tags,
-                                    String favoriteRoomType, String notes) {
+    public GuestPreferencesDocument(String id, List<String> tags, String notes) {
         this.id = id;
-        this.preferredLanguage = preferredLanguage;
-        this.newsLetterOptIn = newsLetterOptIn;
         this.tags = tags;
-        this.favoriteRoomType = favoriteRoomType;
         this.notes = notes;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPreferredLanguage() {
-        return preferredLanguage;
-    }
-
-    public void setPreferredLanguage(String preferredLanguage) {
-        this.preferredLanguage = preferredLanguage;
-    }
-
-    public boolean isNewsLetterOptIn() {
-        return newsLetterOptIn;
-    }
-
-    public void setNewsLetterOptIn(boolean newsLetterOptIn) {
-        this.newsLetterOptIn = newsLetterOptIn;
     }
 
     public List<String> getTags() {
@@ -95,14 +63,6 @@ public class GuestPreferencesDocument {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
-    }
-
-    public String getFavoriteRoomType() {
-        return favoriteRoomType;
-    }
-
-    public void setFavoriteRoomType(String favoriteRoomType) {
-        this.favoriteRoomType = favoriteRoomType;
     }
 
     public String getNotes() {

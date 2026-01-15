@@ -3,6 +3,7 @@ package org.docencia.hotel.service.api;
 import org.docencia.hotel.domain.model.Hotel;
 
 import java.util.List;
+import java.util.Set;
 /**
  * @author danielrguez
  * @version 1.0.0
